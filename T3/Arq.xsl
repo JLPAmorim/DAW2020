@@ -4,89 +4,72 @@
     <xsl:output method="html" encoding="UTF-8" indent="yes"/>
     
     <xsl:template match="/">
-
-		<html>
-			<head>
-				<title>Arqueossítios do NW Português</title>
-			</head>
-			<body>
-				<h2>Arqueossítios do NW Português</h2>				
-				<xsl:apply-templates/>
-			</body>
-		</html>
-	</xsl:template>
-	
-	<xsl:template match="ARQELEM">
-		<div style="margin: 30px; display: block;">
-			<xsl:apply-templates/>
-		</div>
-	</xsl:template>
-	<xsl:template match="IDENTI">
-		<h4>
-			<span style="color:red">Nome:</span> <xsl:value-of select="."/>
-		</h4>
-	</xsl:template>
-	<xsl:template match="DESCRI">
-			 <span style="color:blue">Descrição:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="CRONO">
-			 <span style="color:blue">Cronologia:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="LUGAR">
-			 <span style="color:blue">Lugar:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="FREGUE">
-			 <span style="color:blue">Freguesia:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	
-	<xsl:template match="CONCEL">
-			 <span style="color:blue">Concelho:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="CODADM">
-			 <span style="color:blue">Código:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="LATITU">
-			 <span style="color:blue">Latitude:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="LONGIT">
-			 <span style="color:blue">Longitude:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="ALTITU">
-			 <span style="color:blue">Altitude:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="ACESSO">
-			 <span style="color:blue">Acesso:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="QUADRO">
-			 <span style="color:blue">Quadro:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="TRAARQ">
-			 <span style="color:blue">Trabalhos Arqueológicos:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="DESARQ">
-			 <span style="color:blue">Descrições Arqueológicas:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="INTERP">
-			 <span style="color:blue">Interp:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="DEPOSI">
-			 <span style="color:blue">Deposi:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="INTERE">
-			 <span style="color:blue">Intere:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="BIBLIO">
-			 <span style="color:blue">Bibliografia:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="AUTOR">
-			 <span style="color:blue">Autor:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	<xsl:template match="DATA">
-			 <span style="color:blue">Data:</span> <xsl:value-of select="."/><br/>
-	</xsl:template>
-	
-
-
-
-
+        <xsl:result-document href="site/index.html"> 
+            <head>
+                <title> Arqueossitios do NW Português </title>
+            </head>
+            <body>
+                <h2> Arqueossitios do NW Português</h2>
+                    <ul>
+                        <xsl:apply-templates select="//ARQELEM" mode="indice">
+                            <xsl:sort select="IDENTI" data-type="text" order="ascending"/>
+                        </xsl:apply-templates> 
+                    </ul>
+            </body>
+        </xsl:result-document>  
+        <xsl:apply-templates/>  
+    </xsl:template>
+    
+    
+    <!--  Templates de índice ...................................  -->
+    
+    <xsl:template match="ARQELEM" mode="indice">
+        <li>
+            <a name="i{generate-id()}"/>
+            <a href="{generate-id()}.html">
+                <xsl:value-of select="IDENTI"/>
+            </a>
+        </li>
+    </xsl:template>
+    
+    <!-- Templates para o conteúdo............................... -->
+    
+    <xsl:template match="ARQELEM">
+        <xsl:result-document href="site/{generate-id()}.html">
+            <html>
+                <head>
+                    <title>
+                        <xsl:value-of select="IDENTI"/>
+                    </title>
+                </head>
+                <body>
+                    <p><b>Nome:</b>: <xsl:value-of select="IDENTI"/></p>
+                    <p><b>Descrição</b>: <xsl:value-of select="DESCRI"/></p>
+                    <p><b>Cronologia</b>: <xsl:value-of select="CRONO"/></p>
+                    <p><b>Lugar</b>: <xsl:value-of select="LUGAR"/></p>
+                    <p><b>Freguesia</b>: <xsl:value-of select="FREGUE"/></p>
+                    <p><b>Concelho</b>: <xsl:value-of select="CONCEL"/></p>
+                    <p><b>Código</b>: <xsl:value-of select="CODADM"/></p>
+                    <p><b>Latitude</b>: <xsl:value-of select="LATITU"/></p>
+                    <p><b>Longitude</b>: <xsl:value-of select="LONGIT"/></p>
+                    <p><b>Altitude</b>: <xsl:value-of select="ALTITU"/></p>
+                    <p><b>Acesso</b>: <xsl:value-of select="ACESSO"/></p>
+                    <p><b>Quadro</b>: <xsl:value-of select="QUADRO"/></p>
+                    <p><b>Autor</b>: <xsl:value-of select="AUTOR"/></p>
+                    <p><b>Biblio</b>: <xsl:value-of select="BIBLIO"/></p>
+                    <p><b>Deposito</b>: <xsl:value-of select="DEPOSI"/></p>
+                    <p><b>Desarq</b>: <xsl:value-of select="DESARQ"/></p>
+                    <p><b>Intere</b>: <xsl:value-of select="INTERE"/></p>
+                    <p><b>Interp</b>: <xsl:value-of select="INTERP"/></p>
+                    <p><b>Traarq</b>: <xsl:value-of select="TRAARQ"/></p>
+                    <p><b>Data</b>: <xsl:value-of select="DATA"/></p>
+                    <address>
+                        [
+                        <a href="index.html#i{generate-id()}">Back to Main Page</a>
+                        ]
+                    </address>
+                </body>
+            </html>
+        </xsl:result-document>
+    </xsl:template>
 </xsl:stylesheet>
