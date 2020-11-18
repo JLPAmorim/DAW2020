@@ -24,11 +24,11 @@ http.createServer(function (req, res){
                 res.end()
             })
         }
-    }
-        
+    }       
     console.log(arr)
     console.log(arr.length)
     console.log(num)
     console.log(str)  
+    
 }).listen(7777);
 console.log('Servidor à escuta na porta 7777...')
