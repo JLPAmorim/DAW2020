@@ -2,10 +2,10 @@
 <!DOCTYPE pr SYSTEM "file:/C:/Users/joao_/OneDrive/Ambiente%20de%20Trabalho/DAW2020/pr.dtd">
 <pr>
     <meta>
-        <key>MIEI_DAW20/21_TPC5</key>
+        <key>MIEI_DAW20/21_TPC7</key>
         <title>ToDo List</title>
-        <bdate>18/11/2020</bdate>
-        <edate>25/11/2020</edate>
+        <bdate>25/11/2020</bdate>
+        <edate>08/12/2020</edate>
         <supervisor url="http://www4.di.uminho.pt/~jcr/">José Carlos Ramalho</supervisor>
     </meta>
     <team>
@@ -19,6 +19,8 @@
             de dados em Mongo contendo informações sobre os alunos inscritos em DAW2020</p> 
         <p>Os objetivos desta aplicação são os de listar, registar, editar e eliminar as informações individuais 
             relativas a um aluno.
+        </p>
+        <p>Trabalho entregue com 5 dias de atraso.
         </p>
  
     </abstract>
